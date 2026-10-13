@@ -1,0 +1,60 @@
+{
+  "name": "lz-switcher-motion",
+  "version": "0.1.0",
+  "description": "SuperSource layouts and key DVE moves with easing curves for ATEM switchers: drag boxes on a picture of the frame, save presets, recall them as smooth moves. macOS, Windows, Linux.",
+  "main": "dist/electron/main/index.js",
+  "scripts": {
+    "dev": "concurrently -k -n vite,tsc,electron \"vite --config vite.config.mts\" \"tsc -p tsconfig.main.json -w --preserveWatchOutput\" \"wait-on http-get://localhost:4193 dist/electron/main/index.js && cross-env VITE_DEV_SERVER_URL=http://localhost:4193 electron .\"",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:renderer": "vite build --config vite.config.mts",
+    "build": "npm run build:main && npm run build:renderer",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.main.json --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test",
+    "start": "npm run build && electron .",
+    "dist:mac": "npm run build && electron-builder --config electron-builder.cjs --mac --publish never",
+    "dist:win": "npm run build && electron-builder --config electron-builder.cjs --win --publish never",
+    "dist:linux": "npm run build && electron-builder --config electron-builder.cjs --linux --publish never"
+  },
+  "author": "Lars Zumpe",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@fontsource-variable/public-sans": "^5.3.0",
+    "atem-connection": "^3.10.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "cross-env": "^10.1.0",
+    "electron": "^42.11.13",
+    "electron-builder": "^26.15.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.4",
+    "vitest": "^4.1.11",
+    "wait-on": "^9.5.1"
+  },
+  "allowScripts": {
+    "electron@42.11.13": true,
+    "electron-winstaller@5.4.0": true,
+    "@julusian/freetype2": false
+  },
+  "productName": "LZ Switcher Motion",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/larszu/lz-switcher-motion.git"
+  },
+  "keywords": [
+    "atem",
+    "supersource",
+    "dve",
+    "easing",
+    "broadcast",
+    "switcher"
+  ]
+}

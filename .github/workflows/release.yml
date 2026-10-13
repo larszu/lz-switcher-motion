@@ -37,4 +37,4 @@ jobs:
         run: |
           gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes || true
           shopt -s nullglob
-          gh release upload "$GITHUB_REF_NAME" release/*.dmg release/*.exe release/*.AppImage release/*.deb release/latest*.yml release/*.blockmap --clobber
+          gh release upload "$GITHUB_REF_NAME" release/*.dmg release/*.zip release/*.exe release/*.AppImage release/*.deb release/latest*.yml release/*.blockmap --clobber
